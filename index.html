@@ -311,7 +311,7 @@
   const descricao = carrinho.map(p => `${p.nome} x${p.quantidade}`).join(', ');
 
   try {
-    const response = await fetch('https://SEU-BACKEND-RENDER.com/criar-pagamento', {
+    const response = await fetch('https://tomazelavendas.onrender.com', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ valor, descricao })
