@@ -298,6 +298,35 @@
     function rolarParaFormulario() {
       document.getElementById("finalizarPedido").scrollIntoView({ behavior: "smooth" });
     }
+
+    document.getElementById('checkoutBtn').addEventListener('click', async function () {
+  if (carrinho.length === 0) {
+    alert('Seu carrinho está vazio.');
+    return;
+  }
+
+  const valor = carrinho.reduce((acc, p) => acc + p.preco * p.quantidade, 0).toFixed(2);
+  const descricao = carrinho.map(p => `${p.nome} x${p.quantidade}`).join(', ');
+
+  try {
+    const response = await fetch('https://SEU-BACKEND-RENDER.com/criar-pagamento', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ valor, descricao })
+    });
+
+    const data = await response.json();
+
+    if (data.link) {
+      window.open(data.link, '_blank');
+    } else {
+      alert('Erro ao gerar link de pagamento.');
+    }
+  } catch (error) {
+    alert('Erro de conexão com o servidor.');
+  }
+});
+
   </script>
 </body>
 
