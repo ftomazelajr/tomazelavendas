@@ -297,7 +297,7 @@ function atualizarCarrinho() {
         return;
       }
 
-      const response = await fetch("https://seubackend.onrender.com/criar-pagamento", {
+      const response = await fetch("https://tomazelavendas.onrender.com/criar-pagamento", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ carrinho }),
