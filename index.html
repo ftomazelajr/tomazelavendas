@@ -219,7 +219,7 @@
     <p>&copy; 2025 Tomazela Piscinas 40.136.528/0001-07</p>
   </footer>
 
-  <script>
+   <script>
     const carrinho = [];
 
     function adicionarProduto(nome, preco, selectId) {
@@ -239,96 +239,72 @@
       }
 
       atualizarCarrinho();
-      alert(`${quantidade}x ${nome} adicionado(s) ao carrinho!`);
-      document.getElementById("contadorCarrinho").textContent = carrinho.reduce((acc, p) => acc + p.quantidade, 0);
-    }
-
-    function removerProduto(index) {
-      carrinho.splice(index, 1);
-      atualizarCarrinho();
-      document.getElementById("contadorCarrinho").textContent = carrinho.reduce((acc, p) => acc + p.quantidade, 0);
     }
 
     function atualizarCarrinho() {
-      const lista = document.getElementById('itens-carrinho');
-      const totalElement = document.getElementById('total-carrinho');
-      lista.innerHTML = '';
-      let total = 0;
+      const lista = document.getElementById("itens-carrinho");
+      const total = document.getElementById("total-carrinho");
+      lista.innerHTML = "";
+      let totalGeral = 0;
 
-      carrinho.forEach((item, index) => {
-        const subtotal = item.preco * item.quantidade;
-        total += subtotal;
-        const li = document.createElement('li');
-        li.innerHTML = `${item.nome} x${item.quantidade} - R$ ${subtotal.toFixed(2)} <button onclick="removerProduto(${index})">Remover</button>`;
-        lista.appendChild(li);
+      carrinho.forEach(produto => {
+        const item = document.createElement("li");
+        item.textContent = `${produto.nome} - ${produto.quantidade} x R$ ${produto.preco.toFixed(2)} = R$ ${(produto.preco * produto.quantidade).toFixed(2)}`;
+        lista.appendChild(item);
+        totalGeral += produto.preco * produto.quantidade;
       });
 
-      totalElement.innerText = `Total: R$ ${total.toFixed(2)}`;
+      total.textContent = `Total: R$ ${totalGeral.toFixed(2)}`;
     }
 
     function enviarWhatsapp() {
-      if (carrinho.length === 0) {
-        alert('Seu carrinho está vazio.');
-        return;
-      }
-
-      const nome = document.getElementById('nome').value.trim();
-      const endereco = document.getElementById('endereco').value.trim();
-      const cep = document.getElementById('cep').value.trim();
+      const nome = document.getElementById("nome").value;
+      const endereco = document.getElementById("endereco").value;
+      const cep = document.getElementById("cep").value;
 
       if (!nome || !endereco || !cep) {
-        alert('Por favor, preencha nome, endereço e CEP antes de finalizar o pedido.');
+        alert("Preencha todos os campos para continuar.");
         return;
       }
 
-      let mensagem = 'Olá! Gostaria de comprar:\n';
+      let mensagem = `*Novo Pedido - Tomazela Piscinas*\n\nNome: ${nome}\nEndereço: ${endereco}\nCEP: ${cep}\n\n*Produtos:*`;
       let total = 0;
-      carrinho.forEach(p => {
-        const subtotal = p.preco * p.quantidade;
-        mensagem += `- ${p.nome} x${p.quantidade} - R$ ${subtotal.toFixed(2)}\n`;
-        total += subtotal;
+
+      carrinho.forEach(produto => {
+        mensagem += `\n- ${produto.nome} x${produto.quantidade} - R$ ${(produto.preco * produto.quantidade).toFixed(2)}`;
+        total += produto.preco * produto.quantidade;
       });
 
-      mensagem += `\nTotal: R$ ${total.toFixed(2)}\n`;
-      mensagem += `\nNome: ${nome}\nEndereço: ${endereco}\nCEP: ${cep}`;
+      mensagem += `\n\n*Total:* R$ ${total.toFixed(2)}`;
 
-      const numero = '5514981722063';
+      const numero = "5514981722063"; // Substitua pelo número real com DDI
       const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
-      window.open(url, '_blank');
+
+      window.open(url, "_blank");
     }
 
-    function rolarParaFormulario() {
-      document.getElementById("finalizarPedido").scrollIntoView({ behavior: "smooth" });
-    }
+    document.getElementById("checkoutBtn").addEventListener("click", async () => {
+      if (carrinho.length === 0) {
+        alert("Seu carrinho está vazio.");
+        return;
+      }
 
-    document.getElementById('checkoutBtn').addEventListener('click', async function () {
-  if (carrinho.length === 0) {
-    alert('Seu carrinho está vazio.');
-    return;
-  }
+      const response = await fetch("https://seubackend.onrender.com/criar-pagamento", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ carrinho }),
+      });
 
-  const valor = carrinho.reduce((acc, p) => acc + p.preco * p.quantidade, 0).toFixed(2);
-  const descricao = carrinho.map(p => `${p.nome} x${p.quantidade}`).join(', ');
+      const data = await response.json();
 
-  try {
-    const response = await fetch('https://tomazelavendas.onrender.com/criar-pagamento', {
-      method: 'POST',
-      headers: { 'Content-Type': 'ajson' },
-      body: JSON.stringify({ valor, descricao })
+      if (data.urlPagamento) {
+        window.open(data.urlPagamento, "_blank");
+      } else {
+        alert("Erro ao gerar link de pagamento. Tente novamente.");
+      }
     });
-
-    const data = await response.json();
-
-    if (data.link) {
-      window.open(data.link, '_blank');
-    } else {
-      alert('Erro ao gerar link de pagamento.');
-    }
-  } catch (error) {
-    alert('Erro de conexão com o servidor.');
-  }
-});
   </script>
+
 </body>
 
 </html>
