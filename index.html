@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minha Loja</title>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+
+</head>
+
+<body class="main-bg">
+
+  <header>
+
+    <img src="/assets/img/logo.png" alt="Logo da Loja" class="logo">
+    <h1 class="slogan">"Transformando água em alegria"</h1>
+    <nav>
+      <ul>
+        <li><a href="#produtos">Produtos</a></li>
+        <li><a href="#quem-somos">Quem Somos</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+
+      <div class="carrinho-icon">
+        <a href="#carrinho">
+          <img src="assets/img/cart.png" alt="Carrinho">
+          <span id="contadorCarrinho">0</span>
+        </a>
+      </div>
+
+
+    </nav>
+  </header>
+
+  <section id="produtos" class="produtos">
+    <h1>Nossos Produtos</h1>
+    <div class="lista-produtos" id="lista-produtos">
+
+      <div class="produto">
+        <img src="/assets/img/minihidrosanpenta-4096x4096.png" alt="Cloro 10kg">
+        <h2>Balde Cloro HidroAll Penta 10kg</h2>
+        <p>Hidrosan Penta é o dicloro orgânico aditivado com 5 funções: Desinfetante, clarificante, algistático,
+          estabilizador de pH e eliminador de matéria orgânica.
+
+          Indicado para tratar qualquer tipo de piscina, Hidrosan Penta não reduz a alcalinidade e nem o pH da água. Por
+          isso, piscinas tratadas com Hidrosan Penta permanecem com a água balanceada.</p>
+        <p class="preco">R$ 199,00</p>
+        <label>Qtd: <input type="number" id="qtd-cloro" value="1" min="1" style="width: 50px;"></label>
+        <button onclick="adicionarProduto('Cloro HidroAll Penta 10kg', 199, 'qtd-cloro')">Comprar</button>
+
+      </div>
+
+      <div class="produto">
+        <img src="/assets/img/clarificante.png" alt="Clarificante Genco 1L">
+        <h2>Clarificante Genco 1L</h2>
+        <p>Clarificante e Auxiliar de Filtração GENFLOC®
+          Produto eficaz para tratamento de piscinas. Atua atraindo e agrupando partículas de sujeira em flocos maiores,
+          facilitando sua retenção pelo filtro ou decantação no fundo da piscina. Resultado: água mais clara e filtragem
+          mais eficiente. </p>
+        <p class="preco">R$ 23,00</p>
+        <label>Qtd: <input type="number" id="qtd-clarificante" value="1" min="1" style="width: 50px;"></label>
+        <button onclick="adicionarProduto('Clarificante Genco 1L', 23, 'qtd-clarificante')">Comprar</button>
+
+      </div>
+
+      <div class="produto">
+        <img src="/assets/img/algecidachoque.png" alt="Algecida Choque Genco 1L">
+        <h2>Algecida Choque Genco 1L</h2>
+        <p>O uso do ALGICIDA DE CHOQUE GENCO® é recomendado em caso de piscinas infestadas de algas. É recomendado para
+          qualquer tipo de piscinas (fibra, vinil, azulejo e pintura).</p>
+        <p class="preco">R$ 35,00</p>
+        <label>Qtd: <input type="number" id="qtd-algecidachoque" value="1" min="1" style="width: 50px;"></label>
+        <button onclick="adicionarProduto('Algecida Choque Genco 1L', 35, 'qtd-algecidachoque')">Comprar</button>
+      </div>
+
+      <div class="produto">
+        <img src="/assets/img/PASTILHAHIDROALL.png" alt="Pastilha HidroAll">
+        <h2>Pastilha HidroAll HCL Penta</h2>
+        <p>O Tablete Pastilha de Cloro Penta com 5 Funções é um produto em forma de tabletes, composto por Tricloro
+          Orgânico aditivado com clarificante, algicida, floculante e eliminador de matéria orgânica. Este produto
+          contém estabilizador em sua fórmula que protege o cloro livre da água evitando a perda causada pelos raios
+          solares</p>
+        <p class="preco">R$ 10,00</p>
+        <label>Qtd: <input type="number" id="qtd-pastilhahidroall-hcl" value="1" min="1" style="width: 50px;"></label>
+        <button
+          onclick="adicionarProduto('Pastilha HidroAll HCL Penta', 19.90, 'qtd-pastilhahidroall-hcl')">Comprar</button>
+      </div>
+
+      <div class="produto">
+        <img src="/assets/img/sulfato.png" alt="Sulfato">
+        <h2>Sulfato de Aluminio Sual 2kg</h2>
+        <p>Decantador de ação rápida que aglomera impurezas e as leva ao fundo da piscina, facilitando a limpeza e
+          melhorando a claridade da água. Indicado para todos os tipos de piscina: fibra, vinil ou alvenaria.</p>
+        <p class="preco">R$ 19,90</p>
+        <label>Qtd: <input type="number" id="qtd-sulfato" value="1" min="1" style="width: 50px;"></label>
+        <button onclick="adicionarProduto('Sulfato de Aluminio Sual 2KG', 19.90, 'qtd-sulfato')">Comprar</button>
+
+
+      </div>
+
+      <div class="produto">
+        <img src="/assets/img/elevadoralc.png" alt="elevadorAlc">
+        <h2>Elevador de Alcalinidade 1Kg</h2>
+        <p>O Bicarbonato de Sódio é utilizado para elevar a alcalinidade da água da piscina, ajudando a estabilizar o
+          pH, prevenir corrosões e melhorar a eficiência dos demais produtos químicos. Ideal para manter a água sempre
+          equilibrada e cristalina.</p>
+        <p class="preco">R$ 12,00</p>
+        <label>Qtd: <input type="number" id="qtd-bicarbonato" value="1" min="1" style="width: 50px;"></label>
+        <button onclick="adicionarProduto('Elevador de Alcalinidade 1Kg', 12, 'qtd-bicarbonato')">Comprar</button>
+
+
+      </div>
+
+      <div class="produto">
+        <img src="/assets/img/algManu.png" alt="algManu">
+        <h2>Algecida manutenção Genco 1L</h2>
+        <p>Fórmula desenvolvida especialmente para prevenir o desenvolvimento de algas.
+
+          O uso de ALGICIDA DE MANUTENÇÃO previne o desenvolvimento de algas em águas de piscinas. É recomendado para
+          todos os tipos de piscinas (fibra, vinil, azulejo e pintura).</p>
+        <p class="preco">R$ 23,00</p>
+        <label>Qtd: <input type="number" id="qtd-algManu" value="1" min="1" style="width: 50px;"></label>
+        <button onclick="adicionarProduto('Algecida manutenção Genco 1L', 23, 'qtd-algManu')">Comprar</button>
+
+      </div>
+
+      <div class="produto">
+        <img src="/assets/img/hidroallalg.png" alt="Algecida Manutenção HidroAll 1Lt">
+        <h2>Algecida Manutenção HidroAll 1Lt</h2>
+        <p>Algicida de Manutenção para Piscinas HCL Hidroall 1L é a solução perfeita para prevenir e eliminar o
+          crescimento de algas na sua piscina, mantendo a água limpa, cristalina e saudável. Desenvolvido para uso
+          contínuo, este algicida é ideal para a manutenção da água, evitando que as algas se desenvolvam e causem
+          problemas como água turva, escorregadia e com cheiro desagradável. Sua fórmula eficiente é compatível com todos
+          os tipos de piscinas e proporciona uma ação prolongada, garantindo um ambiente seguro e agradável para todos os
+          banhistas.
+        </p>
+        <p class="preco">R$ 21,90</p>
+        <label>Qtd: <input type="number" id="qtd-hidroallalgmanu" value="1" min="1" style="width: 50px;"></label>
+        <button onclick="adicionarProduto('Algecida Manutenção HidroAll 1Lt', 21.90, 'qtd-hidroallalgmanu')">Comprar</button>
+  
+      </div>
+
+      <div class="produto">
+        <img src="/assets/img/mangueirasilicone.png" alt="Mangueira Siliconada Metro">
+        <h2>Mangueira Siliconada Metro</h2>
+        <p>MANGUEIRA SILICONADA PARA LIMPEZA DE PISCINAS
+
+          Basta conectar o aspirador em uma ponteira e com o adaptador conectar a rosca do aspersor da piscina, e já está pronto para o uso.
+          
+          Características Técnicas:
+          
+          Diâmetro nominal: 1¹/2''
+          Diâmetro interno: 38 mm
+          Diâmetro externo: 43.5 mm
+          Pressão de trabalho: 7.3 Kgf
+          Pressão a ruptura: 20 Kgf
+          
+          OBS: Para todas as piscina em alvenaria, Vinil e Fibra,
+          *Não serve para Piscinas de armação e inflável.</p>
+        <p class="preco">R$ 15,00</p>
+        <label>Qtd: <input type="number" id="qtd-mangueirametro" value="1" min="1" style="width: 50px;"></label>
+        <button onclick="adicionarProduto('Mangueira Siliconada Metro', 15, 'qtd-qtd-mangueirametro')">Comprar</button>
+  
+      </div>
+
+    </div>
+
+    
+  </section>
+
+  <section class="frete">
+    <p><strong>Frete grátis</strong> para compras acima de R$300 nas cidades: Conchas, Porangaba, Tietê, Botucatu,
+      Piramboia, Anhembi, Bofete, Pereiras, Laranjal Paulista e Jumirim.</p>
+  </section>
+
+  <section class="consultoria">
+    <h2>Consultoria Online para Piscinas</h2>
+    <p>Precisa de ajuda com o tratamento da sua piscina? Clique abaixo e fale com nosso especialista!</p>
+    <a href="https://www.tomazelapiscinas.shop" class="botao" target="_blank">Quero Consultoria</a>
+  </section>
+
+
+  <section id="quem-somos" class="quem-somos">
+    <h2>Quem Somos</h2>
+    <p>Com mais de 35 anos de tradição, nossa empresa é referência em limpeza e manutenção de piscinas na região. Uma
+      história que começou com o pai e hoje continua com o filho, sempre prezando pela confiança, qualidade e bom
+      atendimento.
+      Oferecemos serviços especializados como troca de LED, substituição de areia para filtros e venda de produtos para
+      tratamento e cuidados com piscinas.
+      Atendemos mais de 70 clientes fixos, mantendo um relacionamento próximo e duradouro com quem confia no nosso
+      trabalho. Seja para manutenção preventiva, corretiva ou orientações sobre o uso adequado de produtos, você pode
+      contar com a gente!</p>
+  </section>
+
+  <section id="contato" class="contato">
+    <h2>Fale Conosco</h2>
+    <form action="#">
+      <input type="text" placeholder="Seu nome" required>
+      <input type="email" placeholder="Seu e-mail" required>
+      <textarea placeholder="Sua mensagem" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+
+  <section id="carrinho" class="carrinho">
+    <h2>Seu Carrinho</h2>
+    <ul id="itens-carrinho"></ul>
+    <p id="total-carrinho">Total: R$ 0,00</p>
+    <input type="text" id="nome" placeholder="Seu nome completo" required>
+    <input type="text" id="endereco" placeholder="Endereço com número" required>
+    <input type="text" id="cep" placeholder="CEP" required>
+    <button onclick="enviarWhatsapp()">Finalizar Pedido via WhatsApp</button>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Tomazela Piscinas 40.136.528/0001-07</p>
+  </footer>
+
+  <script>
+    const carrinho = [];
+
+    function adicionarProduto(nome, preco, selectId) {
+      const select = document.getElementById(selectId);
+      const quantidade = parseInt(select.value);
+
+      if (quantidade <= 0) {
+        alert('Selecione uma quantidade válida.');
+        return;
+      }
+
+      const produtoExistente = carrinho.find(p => p.nome === nome);
+      if (produtoExistente) {
+        produtoExistente.quantidade += quantidade;
+      } else {
+        carrinho.push({ nome, preco, quantidade });
+      }
+
+      atualizarCarrinho();
+      alert(`${quantidade}x ${nome} adicionado(s) ao carrinho!`);
+      document.getElementById("contadorCarrinho").textContent = carrinho.reduce((acc, p) => acc + p.quantidade, 0);
+    }
+
+    function removerProduto(index) {
+      carrinho.splice(index, 1);
+      atualizarCarrinho();
+      document.getElementById("contadorCarrinho").textContent = carrinho.reduce((acc, p) => acc + p.quantidade, 0);
+    }
+
+    function atualizarCarrinho() {
+      const lista = document.getElementById('itens-carrinho');
+      const totalElement = document.getElementById('total-carrinho');
+      lista.innerHTML = '';
+      let total = 0;
+
+      carrinho.forEach((item, index) => {
+        const subtotal = item.preco * item.quantidade;
+        total += subtotal;
+        const li = document.createElement('li');
+        li.innerHTML = `${item.nome} x${item.quantidade} - R$ ${subtotal.toFixed(2)} <button onclick="removerProduto(${index})">Remover</button>`;
+        lista.appendChild(li);
+      });
+
+      totalElement.innerText = `Total: R$ ${total.toFixed(2)}`;
+    }
+
+    function enviarWhatsapp() {
+      if (carrinho.length === 0) {
+        alert('Seu carrinho está vazio.');
+        return;
+      }
+
+      const nome = document.getElementById('nome').value.trim();
+      const endereco = document.getElementById('endereco').value.trim();
+      const cep = document.getElementById('cep').value.trim();
+
+      if (!nome || !endereco || !cep) {
+        alert('Por favor, preencha nome, endereço e CEP antes de finalizar o pedido.');
+        return;
+      }
+
+      let mensagem = 'Olá! Gostaria de comprar:\n';
+      let total = 0;
+      carrinho.forEach(p => {
+        const subtotal = p.preco * p.quantidade;
+        mensagem += `- ${p.nome} x${p.quantidade} - R$ ${subtotal.toFixed(2)}\n`;
+        total += subtotal;
+      });
+
+      mensagem += `\nTotal: R$ ${total.toFixed(2)}\n`;
+      mensagem += `\nNome: ${nome}\nEndereço: ${endereco}\nCEP: ${cep}`;
+
+      const numero = '5514981722063';
+      const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+      window.open(url, '_blank');
+    }
+
+    function rolarParaFormulario() {
+      document.getElementById("finalizarPedido").scrollIntoView({ behavior: "smooth" });
+    }
+  </script>
+</body>
+
+</html>
