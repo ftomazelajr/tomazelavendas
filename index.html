@@ -222,40 +222,48 @@
    <script>
     const carrinho = [];
 
-    function adicionarProduto(nome, preco, selectId) {
-      const select = document.getElementById(selectId);
-      const quantidade = parseInt(select.value);
+   function adicionarProduto(nome, preco, selectId) {
+  const select = document.getElementById(selectId);
+  const quantidade = parseInt(select.value);
 
-      if (quantidade <= 0) {
-        alert('Selecione uma quantidade válida.');
-        return;
-      }
+  if (quantidade <= 0 || isNaN(quantidade)) {
+    alert('Selecione uma quantidade válida!');
+    return;
+  }
 
-      const produtoExistente = carrinho.find(p => p.nome === nome);
-      if (produtoExistente) {
-        produtoExistente.quantidade += quantidade;
-      } else {
-        carrinho.push({ nome, preco, quantidade });
-      }
+  const itemExistente = carrinho.find(item => item.nome === nome);
 
-      atualizarCarrinho();
-    }
+  if (itemExistente) {
+    itemExistente.quantidade += quantidade;
+  } else {
+    carrinho.push({ nome, preco, quantidade });
+  }
 
-    function atualizarCarrinho() {
-      const lista = document.getElementById("itens-carrinho");
-      const total = document.getElementById("total-carrinho");
-      lista.innerHTML = "";
-      let totalGeral = 0;
+  atualizarCarrinho();
+}
 
-      carrinho.forEach(produto => {
-        const item = document.createElement("li");
-        item.textContent = `${produto.nome} - ${produto.quantidade} x R$ ${produto.preco.toFixed(2)} = R$ ${(produto.preco * produto.quantidade).toFixed(2)}`;
-        lista.appendChild(item);
-        totalGeral += produto.preco * produto.quantidade;
-      });
+function atualizarCarrinho() {
+  const lista = document.getElementById('itens-carrinho');
+  const totalSpan = document.getElementById('total-carrinho');
+  const contador = document.getElementById('contadorCarrinho');
 
-      total.textContent = `Total: R$ ${totalGeral.toFixed(2)}`;
-    }
+  lista.innerHTML = ''; // Limpa a lista antes de atualizar
+  let total = 0;
+  let totalItens = 0;
+
+  carrinho.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = `${item.quantidade}x ${item.nome} - R$ ${(item.preco * item.quantidade).toFixed(2)}`;
+    lista.appendChild(li);
+
+    total += item.preco * item.quantidade;
+    totalItens += item.quantidade;
+  });
+
+  totalSpan.textContent = `Total: R$ ${total.toFixed(2)}`;
+  contador.textContent = totalItens;
+}
+
 
     function enviarWhatsapp() {
       const nome = document.getElementById("nome").value;
