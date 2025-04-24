@@ -311,23 +311,22 @@
   const descricao = carrinho.map(p => `${p.nome} x${p.quantidade}`).join(', ');
 
   try {
-    const response = await fetch('https://tomazelavendas.onrender.com', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ valor, descricao })
-    });
-
-    const data = await response.json();
-
-    if (data.link) {
-      window.open(data.link, '_blank');
-    } else {
-      alert('Erro ao gerar link de pagamento.');
-    }
-  } catch (error) {
-    alert('Erro de conexão com o servidor.');
-  }
-});
+    const response = await fetch("https://tomazelavendas.onrender.com/criar-pagamento", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    valor: 100.00,
+    descricao: "Compra teste"
+  })
+})
+.then(res => res.json())
+.then(data => {
+  console.log(data);
+  window.open(data.link, "_blank"); // ou redireciona direto
+})
+.catch(err => console.error("Erro:", err));
 
   </script>
 </body>
