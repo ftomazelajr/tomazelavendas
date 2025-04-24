@@ -1,7 +1,17 @@
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
+const cors = require('cors');
 const app = express();
+
+const corsOptions = {
+  origin: 'https://ftomazelajr.github.io', // coloque aqui o domínio exato do seu frontend
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type'],
+};
+
+app.use(cors(corsOptions));
+
 
 app.use(cors());
 app.use(express.json());
