@@ -262,8 +262,8 @@ function atualizarCarrinho() {
 
   totalSpan.textContent = `Total: R$ ${total.toFixed(2)}`;
   contador.textContent = totalItens;
-
-  atualizarCarrinho();
+}
+  atualizarCarrinho(); {
       alert(`${quantidade}x ${nome} adicionado(s) ao carrinho!`);
       document.getElementById("contadorCarrinho").textContent = carrinho.reduce((acc, p) => acc + p.quantidade, 0);
 }
