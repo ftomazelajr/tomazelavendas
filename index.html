@@ -219,104 +219,103 @@
     <p>&copy; 2025 Tomazela Piscinas 40.136.528/0001-07</p>
   </footer>
 
-   <script>
-    const carrinho = [];
+<script>
+  const carrinho = [];
 
-   function adicionarProduto(nome, preco, selectId) {
-  const select = document.getElementById(selectId);
-  const quantidade = parseInt(select.value);
+  function adicionarProduto(nome, preco, selectId) {
+    const select = document.getElementById(selectId);
+    const quantidade = parseInt(select.value);
 
-  if (quantidade <= 0 || isNaN(quantidade)) {
-    alert('Selecione uma quantidade válida!');
-    return;
-  }
-
-  const itemExistente = carrinho.find(item => item.nome === nome);
-
-  if (itemExistente) {
-    itemExistente.quantidade += quantidade;
-  } else {
-    carrinho.push({ nome, preco, quantidade });
-  }
-
-  atualizarCarrinho();
-}
-
-function atualizarCarrinho() {
-  const lista = document.getElementById('itens-carrinho');
-  const totalSpan = document.getElementById('total-carrinho');
-  const contador = document.getElementById('contadorCarrinho');
-
-  lista.innerHTML = ''; // Limpa a lista antes de atualizar
-  let total = 0;
-  let totalItens = 0;
-
-  carrinho.forEach(item => {
-    const li = document.createElement('li');
-    li.textContent = `${item.quantidade}x ${item.nome} - R$ ${(item.preco * item.quantidade).toFixed(2)}`;
-    lista.appendChild(li);
-
-    total += item.preco * item.quantidade;
-    totalItens += item.quantidade;
-  });
-
-  totalSpan.textContent = `Total: R$ ${total.toFixed(2)}`;
-  contador.textContent = totalItens;
-}
-  atualizarCarrinho(); {
-      alert(`${quantidade}x ${nome} adicionado(s) ao carrinho!`);
-      document.getElementById("contadorCarrinho").textContent = carrinho.reduce((acc, p) => acc + p.quantidade, 0);
-}
-     
-
-
-    function enviarWhatsapp() {
-      const nome = document.getElementById("nome").value;
-      const endereco = document.getElementById("endereco").value;
-      const cep = document.getElementById("cep").value;
-
-      if (!nome || !endereco || !cep) {
-        alert("Preencha todos os campos para continuar.");
-        return;
-      }
-
-      let mensagem = `*Novo Pedido - Tomazela Piscinas*\n\nNome: ${nome}\nEndereço: ${endereco}\nCEP: ${cep}\n\n*Produtos:*`;
-      let total = 0;
-
-      carrinho.forEach(produto => {
-        mensagem += `\n- ${produto.nome} x${produto.quantidade} - R$ ${(produto.preco * produto.quantidade).toFixed(2)}`;
-        total += produto.preco * produto.quantidade;
-      });
-
-      mensagem += `\n\n*Total:* R$ ${total.toFixed(2)}`;
-
-      const numero = "5514981722063"; // Substitua pelo número real com DDI
-      const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
-
-      window.open(url, "_blank");
+    if (quantidade <= 0 || isNaN(quantidade)) {
+      alert('Selecione uma quantidade válida!');
+      return;
     }
 
-    document.getElementById("checkoutBtn").addEventListener("click", async () => {
-      if (carrinho.length === 0) {
-        alert("Seu carrinho está vazio.");
-        return;
-      }
+    const itemExistente = carrinho.find(item => item.nome === nome);
 
-      const response = await fetch("https://tomazelavendas.onrender.com/criar-pagamento", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ carrinho }),
-      });
+    if (itemExistente) {
+      itemExistente.quantidade += quantidade;
+    } else {
+      carrinho.push({ nome, preco, quantidade });
+    }
 
-      const data = await response.json();
+    // Atualiza o carrinho
+    atualizarCarrinho();
 
-      if (data.urlPagamento) {
-        window.open(data.urlPagamento, "_blank");
-      } else {
-        alert("Erro ao gerar link de pagamento. Tente novamente.");
-      }
+    // Exibe o alerta de produto adicionado
+    alert(`${quantidade}x ${nome} adicionado(s) ao carrinho!`);
+  }
+
+  function atualizarCarrinho() {
+    const lista = document.getElementById('itens-carrinho');
+    const totalSpan = document.getElementById('total-carrinho');
+    const contador = document.getElementById('contadorCarrinho');
+
+    lista.innerHTML = ''; // Limpa a lista antes de atualizar
+    let total = 0;
+    let totalItens = 0;
+
+    carrinho.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = `${item.quantidade}x ${item.nome} - R$ ${(item.preco * item.quantidade).toFixed(2)}`;
+      lista.appendChild(li);
+
+      total += item.preco * item.quantidade;
+      totalItens += item.quantidade;
     });
-  </script>
+
+    totalSpan.textContent = `Total: R$ ${total.toFixed(2)}`;
+    contador.textContent = totalItens;
+  }
+
+  function enviarWhatsapp() {
+    const nome = document.getElementById("nome").value;
+    const endereco = document.getElementById("endereco").value;
+    const cep = document.getElementById("cep").value;
+
+    if (!nome || !endereco || !cep) {
+      alert("Preencha todos os campos para continuar.");
+      return;
+    }
+
+    let mensagem = `*Novo Pedido - Tomazela Piscinas*\n\nNome: ${nome}\nEndereço: ${endereco}\nCEP: ${cep}\n\n*Produtos:*`;
+    let total = 0;
+
+    carrinho.forEach(produto => {
+      mensagem += `\n- ${produto.nome} x${produto.quantidade} - R$ ${(produto.preco * produto.quantidade).toFixed(2)}`;
+      total += produto.preco * produto.quantidade;
+    });
+
+    mensagem += `\n\n*Total:* R$ ${total.toFixed(2)}`;
+
+    const numero = "5514981722063"; // Substitua pelo número real com DDI
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+
+    window.open(url, "_blank");
+  }
+
+  document.getElementById("checkoutBtn").addEventListener("click", async () => {
+    if (carrinho.length === 0) {
+      alert("Seu carrinho está vazio.");
+      return;
+    }
+
+    const response = await fetch("https://tomazelavendas.onrender.com/criar-pagamento", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ carrinho }),
+    });
+
+    const data = await response.json();
+
+    if (data.urlPagamento) {
+      window.open(data.urlPagamento, "_blank");
+    } else {
+      alert("Erro ao gerar link de pagamento. Tente novamente.");
+    }
+  });
+</script>
+
 
 </body>
 
